@@ -30,6 +30,19 @@ contract Utilities is DSTest {
         return users;
     }
 
+    //create users with 100 ether balance
+    function createAddresses(uint256 userNum)
+        external
+        returns (address[] memory)
+    {
+        address[] memory users = new address[](userNum);
+        for (uint256 i = 0; i < userNum; i++) {
+            address user = this.getNextUserAddress();
+            users[i] = user;
+        }
+        return users;
+    }
+
     //move block.number forward by a given number of blocks
     function mineBlocks(uint256 numBlocks) external {
         uint256 targetBlock = block.number + numBlocks;
