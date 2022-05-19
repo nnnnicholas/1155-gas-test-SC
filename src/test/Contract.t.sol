@@ -11,17 +11,19 @@ contract ContractTest is DSTest {
     Vm internal immutable vm = Vm(HEVM_ADDRESS);
 
     Utilities internal utils;
-    address[] internal addresses10k;
+    address[] internal addresses400;
     address[] internal addresses1k;
-    address[][] internal addressRanges;
     address[] internal addresses5k;
+    address[] internal addresses10k;
+    // address[][] internal addressRanges;
     Contract public c = new Contract();
 
     function setUp() public {
         utils = new Utilities();
+        addresses400 = utils.createAddresses(400);
+        addresses1k = utils.createAddresses(1000);
         addresses10k = utils.createAddresses(10000);
         // addresses5k = utils.createAddresses(5000);
-        addresses1k = utils.createAddresses(1000);
         // for (uint256 i = 0; i < 10; i++) {
         // addressRanges[4] = utils.createAddresses(100);
         // }
@@ -53,11 +55,20 @@ contract ContractTest is DSTest {
     //     c.batchMintRewrite1Each(addresses, 1);
     // }
 
-    function testBatches10k() public {
-        console.log(addresses10k.length);
-        c.batchMintRewrite1Each(addresses10k, 1);
-        for (uint256 i = 0; i < addresses10k.length; i++) {
-            assert(c.balanceOf(addresses10k[i], 1) == 1);
+    // WORKS
+    // function testBatches10k() public {
+    //     console.log(addresses10k.length);
+    //     c.batchMintRewrite1Each(addresses10k, 1);
+    //     for (uint256 i = 0; i < addresses10k.length; i++) {
+    //         assert(c.balanceOf(addresses10k[i], 1) == 1);
+    //     }
+    // }
+
+    function testBatchesOf400() public {
+        console.log(addresses400.length);
+        c.batchMintRewrite1Each(addresses400, 1);
+        for (uint256 i = 0; i < addresses400.length; i++) {
+            assert(c.balanceOf(addresses400[i], 1) == 1);
         }
     }
 }
