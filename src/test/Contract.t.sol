@@ -56,19 +56,29 @@ contract ContractTest is DSTest {
     // }
 
     // WORKS
-    // function testBatches10k() public {
-    //     console.log(addresses10k.length);
-    //     c.batchMintRewrite1Each(addresses10k, 1);
-    //     for (uint256 i = 0; i < addresses10k.length; i++) {
-    //         assert(c.balanceOf(addresses10k[i], 1) == 1);
-    //     }
-    // }
+    function testBatch10k() public {
+        console.log(addresses10k.length);
+        c.batchMint(addresses10k, 1);
+        // for (uint256 i = 0; i < addresses10k.length; i++) {
+        //     assert(c.balanceOf(addresses10k[i], 1) == 1);
+        // }
+    }
 
-    function testBatchesOf400() public {
+    function test400() public {
         console.log(addresses400.length);
-        c.batchMintRewrite1Each(addresses400, 1);
+        c.batchMint(addresses400, 1); // drop
         for (uint256 i = 0; i < addresses400.length; i++) {
-            assert(c.balanceOf(addresses400[i], 1) == 1);
+            assert(c.balanceOf(addresses400[i], 1) == 1); // verify dropped
         }
     }
+
+    // function test25BatchesOf400() public {
+    //     console.log(addresses400.length);
+    //     for (uint256 i = 0; i < 25; i++) {
+    //         c.batchMint(addresses400, 1); // drop
+    //     }
+    //     for (uint256 i = 0; i < addresses400.length; i++) {
+    //         assert(c.balanceOf(addresses400[i], 1) == 25); // verify dropped
+    //     }
+    // }
 }

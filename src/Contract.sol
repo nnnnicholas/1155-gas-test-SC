@@ -7,26 +7,26 @@ import "openzeppelin-contracts/contracts/access/Ownable.sol";
 contract Contract is ERC1155, Ownable {
     constructor() ERC1155() {}
 
-    function mint(
-        address to,
-        uint256 id,
-        uint256 amount,
-        bytes memory data
-    ) public onlyOwner {
-        ERC1155._mint(to, id, amount, data);
-    }
+    // function mint(
+    //     address to,
+    //     uint256 id,
+    //     uint256 amount,
+    //     bytes memory data
+    // ) public onlyOwner {
+    //     ERC1155._mint(to, id, amount, data);
+    // }
 
-    function batchMint(
-        address to,
-        uint256[] memory ids,
-        uint256[] memory amounts,
-        bytes memory data
-    ) external onlyOwner {
-        ERC1155._batchMint(to, ids, amounts, data);
-    }
+    // function batchMint(
+    //     address to,
+    //     uint256[] memory ids,
+    //     uint256[] memory amounts,
+    //     bytes memory data
+    // ) external onlyOwner {
+    //     ERC1155._batchMint(to, ids, amounts, data);
+    // }
 
-    // optimized
-    function batchMintRewrite1Each(address[] memory recipients, uint256 id)
+    // optimized batch mint rewrite
+    function batchMint(address[] memory recipients, uint256 id)
         external
         onlyOwner
     {
@@ -43,9 +43,9 @@ contract Contract is ERC1155, Ownable {
         return "URI";
     }
 
-    function testMintOneThousand() public onlyOwner {
-        for (uint160 i = 0; i < 1000; i++) {
-            mint(address(i), 1, 1, "");
-        }
-    }
+    // function testMintOneThousand() public onlyOwner {
+    //     for (uint160 i = 0; i < 1000; i++) {
+    //         mint(address(i), 1, 1, "");
+    //     }
+    // }
 }
